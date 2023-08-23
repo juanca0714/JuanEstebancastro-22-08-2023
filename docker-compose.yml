@@ -1,0 +1,27 @@
+version: '3'
+services:
+  servicio1:
+    build:
+      context: .
+      dockerfile: dockerfile
+    ports:
+      - "8439:80"
+    volumes:
+      - ~/Desktop/datadrive:/ruta/del/volumen/en/el/contenedor
+    networks:
+      - mynetwork
+
+  servicio2:
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: mysecretpassword
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: myuserpassword
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
